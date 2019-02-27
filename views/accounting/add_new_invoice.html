@@ -1,0 +1,127 @@
+<div class="animated fadeIn" ng-controller="customer_controller" >
+        <div class="row" ng-init="initillize_new_invoice_form()">
+          <div class="col-sm-12">
+            <div class="card">
+                <form name="add_new_purchase_order_form" enctype="multipart/form-data">
+              <div class="card-header">
+                <strong>Add New Purchase Order</strong>
+                
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Customer Information : {{customerinfo.id}}
+                            </div>
+                            <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Customer Name</label>
+                                        <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="Customer Name" ng-model="customerinfo.name" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">Customer Address</label>
+                                            <div class="col-md-8">
+                                                    <textarea class="form-control" ng-model="customerinfo.address" rows="4" class="form-control" placeholder="Address.." readonly></textarea>
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">Customer GST</label>
+                                            <div class="col-md-8">
+                                                    <input type="text" class="form-control" placeholder="Customer GST" ng-model="customerinfo.gst_number" readonly>
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">Customer Email</label>
+                                            <div class="col-md-8">
+                                                    <input type="text" class="form-control" placeholder="Customer Email" ng-model="customerinfo.email_address" readonly>
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">Customer Contact</label>
+                                            <div class="col-md-8">
+                                                    <input type="text" class="form-control" placeholder="Customer Contact" ng-model="customerinfo.contact" readonly>
+                                            </div>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                  </div>
+                  <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Invoice Details :
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Invoice No</label>
+                                        <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="Invoice No" ng-model="invoice.invoice_no" readonly>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Invoice Date</label>
+                                        <div class="col-md-8">
+                                                <input type="date" class="form-control"  placeholder="Invoice Date" ng-model="invoice.invoice_date">
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Purchase Order No</label>
+                                        <div class="col-md-8">
+                                                <select class="form-control" aria-placeholder="Purchase Order No" ng-model="invoice.po_no" ng-change="update_po_date_invoice_form()">
+                                                        <option   ng-repeat="po_list in customer_po_info" value="{{po_list.id}}">{{po_list.po_number}}</option>
+                                                </select>
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Purchase Order Date</label>
+                                        <div class="col-md-8">
+                                                <input type="date" class="form-control"  placeholder="Purchase Order Date" ng-model="invoice.po_date">
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">Invoice Type</label>
+                                        <div class="col-md-8">
+                                                <select class="form-control" aria-placeholder="Invoice Type" ng-model="invoice.invoice_type" >
+                                                        <option   ng-repeat="inv_type in customer_invoice_type_master" value="{{inv_type.val}}">{{inv_type.val}}</option>
+                                                </select>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                  <div class="form-group col-sm-4">
+                    <label for="tz_po_date">PO Date</label>
+                    <input type="date" name="tz_po_date" ng-model="po_data.tz_po_date" id="tz_po_date" class="form-control" placeholder="PO Date" required>
+                  </div>
+                  <div class="form-group col-sm-4">
+                        <label for="tz_po_number">PO Number</label>
+                        <input type="text" name="tz_po_number" ng-model="po_data.tz_po_number" id="tz_po_number" class="form-control" placeholder="PO Number" required>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="tz_po_file">Document</label>
+                      <input type="file" select-ng-files class="form-control" name="tz_po_file" ng-model="po_data.tz_po_file" id="tz_po_file"  >
+                     <!-- <input ng-upload-change="uploadBank($event)" name="tz_po_file" ng-model="po_data.tz_po_file" id="tz_po_file" type="file">
+                      <span class="text-danger" ng-show="add_new_purchase_order_form.tz_po_file.$touched && add_new_purchase_order_form.tz_po_file.$invalid">Please upload document.</span> -->
+                    </div>
+                  </div>
+                </div>
+                <!--/.row-->
+              </div>
+              <div class="card-footer text-center">
+                    <button  type="button" name="submit"  ng-click="save_purchase_order()" ng-disabled="add_new_purchase_order_form.$invalid"  class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                    <button ui-sref="app.accounting.purchase_orders" class="btn btn-danger"><i class="fa fa-ban"></i> Back</button>
+            </div>
+        </form>
+            </div>
+          </div>
+          <!--/.col-->
+         
+        </div>
+</div>

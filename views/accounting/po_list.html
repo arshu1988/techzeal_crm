@@ -1,0 +1,50 @@
+<div class="animated fadeIn" ng-controller="customer_controller" >
+    <div class="row" ng-init="get_po_list_view()">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          Purchase Order List
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <input type="text" ng-model="search" class="form-control" placeholder="search.." style="margin-top: 10px;margin-bottom: 10px;" >
+              </div>
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>PO Date</th>
+                <th>PO Number</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="po in po_list_data.list|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+                    <td>{{po.cust_name}}</td>
+                    <td>{{po.po_date}}</td>
+                    <td>{{po.po_number}}</td>
+                    <td>
+                      <a ng-if="po.status=='active'" class="btn btn-danger btn-sm" ng-click="process_po(po.id)" >Mark Expired</a>
+                      <a class="btn btn-info btn-sm" target="_blank" href="{{base_url_bacend_tz}}uploads/po/{{po.download_link}}">View</a>
+                    </td>
+                </tr>    
+            </tbody>
+          </table>
+          <!--<nav>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>-->
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

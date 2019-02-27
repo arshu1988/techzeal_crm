@@ -1,0 +1,57 @@
+<div class="animated fadeIn" ng-controller="customer_controller" >
+        <div class="row" ng-init="initillize_customer_form()">
+          <div class="col-sm-12">
+            <div class="card">
+                <form name="add_new_customer_form">
+              <div class="card-header">
+                <strong>Add New Customer</strong>
+                
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="name">Name {{customer_data.tz_name}} a</label>
+                      <input type="text" class="form-control" name="tz_name" ng-model="customer_data.tz_name" id="name" placeholder="Enter your name" required>
+                    </div>
+                  </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="tz_address">Address</label>
+                      <textarea id="tz_address" name="tz_address" ng-model="customer_data.tz_address" rows="6" class="form-control" placeholder="Address......" required></textarea>
+                    </div>
+                  </div>
+                </div>
+                <!--/.row-->
+                <div class="row">
+                  <div class="form-group col-sm-4">
+                    <label for="tz_gst_number">GST Number</label>
+                    <input type="text" name="tz_gst_number" ng-model="customer_data.tz_gst_number" id="tz_gst_number" class="form-control" placeholder="GST Number" required>
+                  </div>
+                  <div class="form-group col-sm-4">
+                        <label for="tz_email">Email</label>
+                        <input type="email" name="tz_email" ng-model="customer_data.tz_email" id="tz_email" class="form-control" placeholder="Email Address" required>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="tz_contact">Contact</label>
+                      <input type="text" class="form-control" name="tz_contact" ng-model="customer_data.tz_contact" id="tz_contact" placeholder="+91-1234567890" required>
+                    </div>
+                  </div>
+                </div>
+                <!--/.row-->
+              </div>
+              <div class="card-footer text-center">
+                    <button  type="button" name="submit"  ng-click="save_customer()" ng-disabled="add_new_customer_form.$invalid"  class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                    <button ui-sref="app.accounting.customers" class="btn btn-danger"><i class="fa fa-ban"></i> Back</button>
+            </div>
+        </form>
+            </div>
+          </div>
+          <!--/.col-->
+         
+        </div>
+</div>

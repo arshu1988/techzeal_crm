@@ -1,0 +1,55 @@
+<div class="animated fadeIn" ng-controller="customer_controller" >
+    <div class="row" ng-init="get_customer_list_view()">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          Customer List &nbsp;<a ui-sref="app.accounting.add_new_customer"  class="btn btn-primary btn-sm">Add Customer</a>
+        </div>
+        <div class="card-body">
+            <div class="row col-12">
+                <input type="text" ng-model="search" class="form-control" placeholder="search.." style="margin-top: 10px;margin-bottom: 10px;" >
+              </div>
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>GST Number</th>
+                <th>Email Address</th>
+                <th>Contact</th>
+                <th>Invoices</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="customers in customer_data.list|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+                    <td>{{customers.name}}</td>
+                    <td>{{customers.gst_number}}</td>
+                    <td>{{customers.email_address}}</td>
+                    <td>{{customers.contact}}</td>
+                    <td><a class="btn btn-outline-primary btn-sm" ui-sref="app.accounting.list_invoices({cust_id:customers.id})" ><i class="fa fa-list-alt fa-lg"></i></a></td>
+                    <td>
+                      <a class="btn btn-primary btn-sm" ui-sref="app.accounting.add_new_po({cust_id:customers.id})" >Add PO</a>
+                      <a class="btn btn-primary btn-sm" ui-sref="app.accounting.add_new_invoice({cust_id:customers.id})" >Generate Invoice</a>
+                    </td>
+                    
+                </tr>    
+            </tbody>
+          </table>
+          <!--<nav>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>-->
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>
